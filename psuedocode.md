@@ -30,21 +30,31 @@
     - Header
      - Nav Bar
       - Enter Button - Add to todo list
-      - Text Input
+      - Text Input (Create todo Local Storage)
     - List Section
      - input field to pass to Local Storage of To Do item
 
 ##### Model
  - constructor
 
- - setState
-  - empty array of this.itemsToDo
-  - empty array of this.alreadyDone
-  - empty array of this.addToDo
+ - setState - viewState/filterState
+  - empty array of this.itemsToDo (All)
+  - empty array of this.alreadyDone (Completed)
+  - empty array of this.activeToDo (Active)
 
-  - current page
+  - current page/To do
   
   - show/hide the item in the array (boolean)
+  - have todos (boolean)
+    - if true
+    - if false
+
+ - State of List Item Component
+    - keyID - unique integer - Date timestamp
+    - checked - boolean
+    - deleted - boolean
+    - textValue - string
+    - Created at:
 
 ##### Controller
 
@@ -54,10 +64,32 @@
  - componentDidUpdate
   - update page number
   - add/delete from list
+  - stringify/parse
+  - add to local storage
 
  - helperFunctions
+  - All
+  - Completed
+  - toDo
+  - handleClear
+  - viewCount
+    - .length
+  - 
 
  - localStorage CRUD Functions
+  - Create
+    - create new to do
+  - Read
+   - See List
+   - Filter Value
+   - view count
+   - render
+  - Update
+   - Clear
+   - Filter Value
+   - update current todo
+  - Delete
+    - would be soft delete update method
 
 ##### View
  - render
@@ -115,3 +147,12 @@
     2. ToDo List organism
     3. Footer Organism
     4. Header Molecule
+
+```
+Arr.map(todo, index) =>{
+return to do
+} 
+
+```
+- could be in the App render ^^^^
+- could create helper function that returns constant of todo list items
