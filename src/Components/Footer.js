@@ -4,16 +4,18 @@ import React from 'react'
 
 export default function Footer() {
     return (
-        <div className='row'>
+        
                 <div className='col-12 text-center justify-content-center'>
                     <div className="btn-group" role="group" aria-label="Basic outlined example">
+                    <div className='h5 d-flex justify-content-start'>Count=</div>
+                    
                         <button type="button" className="btn btn-outline-secondary">All</button>
                         <button type="button" className="btn btn-outline-secondary">Active</button>
                         <button type="button" className="btn btn-outline-secondary">Completed</button>
                         <button type="button" className="btn btn-outline-secondary">Clear Completed</button>
                     </div>
                 </div>
-            </div>
+            
         );
 }
 

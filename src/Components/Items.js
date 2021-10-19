@@ -45,7 +45,7 @@ class Items extends Component {
                 </div>
                 <div className="col-lg-8 col-sm-12 py-2">
                     <div className="card card-body flex-column text-center p-3 mb-2 bg-secondary text-white h-100">
-                        <h1>New Task</h1>
+                        <h1>{this.state.inputText}</h1>
                     </div>
                 </div>
                 <div className="col-lg-2 col-sm-12 py-2">

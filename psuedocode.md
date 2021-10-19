@@ -55,7 +55,6 @@
     - checked - boolean
     - deleted - boolean
     - textValue - string
-    - Created at:
 
 ##### Controller
 
@@ -69,12 +68,27 @@
     - add to local storage
 
 - helperFunctions
+    - Add Item
+        - push item into allItems array
+    - Checked Off
+        - Line through item
+    - Delete item
+        - Remove item completely from allItems array
+        - onClick to trash button
     - All
         - return all Items
+        - this.filterBy = All
     - Completed
+        - if checked button clicked
         - return only completed Items
+        - this.filterBy = Completed
+    - showActive
+        - if not clicked
+        - show only unclicked items
     - toDo
+        - filter items that have not been clicked (false)
     - handleClear
+        - remove all items in allItems array
     - viewCount
         - .length
 

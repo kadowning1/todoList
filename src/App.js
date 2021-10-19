@@ -9,14 +9,14 @@ class App extends Component {
         super(props)
         this.state = {
             allItems: [],
-            inputText: '',
+            inputText: 'Keith',
             filterBy: 'All'
         }
     }
 
 
     render() {
-        console.log('App props:', this.props)
+        console.log('App props:', this.state.inputText)
         return (
             <>
                 <div className="">
