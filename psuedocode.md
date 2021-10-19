@@ -16,6 +16,19 @@
 
 ### Overview
 
+- 4 different components/functions
+    - App
+     - will contain intial state setting
+     - will render the other 3 components
+    - Footer
+     - Remove Button
+     - Active Button
+     - Completed Button
+    - Header
+     - Nav Bar
+    - List Section
+     - input field to pass to Local Storage of To Do item
+
 ##### Model
  - constructor
 
@@ -23,14 +36,19 @@
   - empty array of this.itemsToDo
   - empty array of this.alreadyDone
   - empty array of this.addToDo
+
+  - current page
   
   - show/hide the item in the array (boolean)
 
 ##### Controller
 
  - componentDidMount
+  - set up localStorage
 
  - componentDidUpdate
+  - update page number
+  - add/delete from list
 
  - helperFunctions
 
@@ -38,6 +56,7 @@
 
 ##### View
  - render
+
  - method to mapArray
 
 ### 10/18 Session w/Ian
@@ -73,3 +92,5 @@
     - Completed tab
 
 - 3 different views
+
+### 10/19 Session w/Ian
