@@ -18,33 +18,34 @@
 
 - 4 different components/functions
     - App
-     - will contain intial state setting
-     - will render the other 3 components
+        - will contain intial state setting
+        - will render the other 3 components
     - Footer
-     - Remove Button 
-     - Active Button (Bootstrap Button Group)
-     - Completed Button (Bootstrap Button Group)
-     - All Button (Bootstrap Button Group)
-     - Count number of to do
-     - Could be footer
+        - Remove Button 
+        - Active Button (Bootstrap Button Group)
+        - Completed Button (Bootstrap Button Group)
+        - All Button (Bootstrap Button Group)
+        - Count number of to do
+        - Could be footer
     - Header
-     - Nav Bar
-      - Enter Button - Add to todo list
-      - Text Input (Create todo Local Storage)
+        - Nav Bar
+        - Enter Button - Add to todo list
+        - Text Input (Create todo Local Storage)
     - List Section
-     - input field to pass to Local Storage of To Do item
+        - input field to pass to Local Storage of To Do item
 
 ##### Model
  - constructor
 
  - setState - viewState/filterState
-  - empty array of this.itemsToDo (All)
-  - empty array of this.alreadyDone (Completed)
-  - empty array of this.activeToDo (Active)
+    - empty array of this.itemsToDo (All)
+    - empty array of this.alreadyDone (Completed)
+    - empty array of this.activeToDo (Active)
 
   - current page/To do
   
   - show/hide the item in the array (boolean)
+
   - have todos (boolean)
     - if true
     - if false
@@ -58,38 +59,39 @@
 
 ##### Controller
 
- - componentDidMount
-  - set up localStorage
+- componentDidMount
+    - set up localStorage
 
- - componentDidUpdate
-  - update page number
-  - add/delete from list
-  - stringify/parse
-  - add to local storage
+- componentDidUpdate
+    - update page number
+    - add/delete from list
+    - stringify/parse
+    - add to local storage
 
- - helperFunctions
-  - All
-  - Completed
-  - toDo
-  - handleClear
-  - viewCount
-    - .length
-  - 
+- helperFunctions
+    - All
+        - return all Items
+    - Completed
+        - return only completed Items
+    - toDo
+    - handleClear
+    - viewCount
+        - .length
 
- - localStorage CRUD Functions
-  - Create
-    - create new to do
-  - Read
-   - See List
-   - Filter Value
-   - view count
-   - render
-  - Update
-   - Clear
-   - Filter Value
-   - update current todo
+- localStorage CRUD Functions
+    - Create
+        - create new to do
+    - Read
+        - See List
+        - Filter Value
+        - view count
+        - render
+    - Update
+        - Clear
+        - Filter Value
+        - update current todo
   - Delete
-    - would be soft delete update method
+        - would be soft delete update method
 
 ##### View
  - render

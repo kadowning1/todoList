@@ -1,19 +1,41 @@
 import './App.css';
-// import Header from "./Components/Header"
-// import Footer from './Components/Footer';
+import Header from "./Components/Header"
+import Items from './Components/Items'
+import Footer from './Components/Footer'
+import React, { Component } from "react"
 
-function App() {
-    return (
-        <div className="">
-            <h1 className="text-center">
-                To Do List!
+class App extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            allItems: [],
+            inputText: '',
+            filterBy: 'All'
+        }
+    }
+
+
+    render() {
+        console.log('App props:', this.props)
+        return (
+            <>
+                <div className="">
+                    <h1 className="text-center">
+                        To Do List
             </h1>
-        </div>
-        // <Header />
+                </div>
+                <div className='container'>
+                    <div className='row justify-content-center'>
+                        <Header />
+                        <Items />
+                        <Footer />
+                    </div>
+                </div>
+            </>
 
-        // <Footer />
-
-  );
+        );
+    }
 }
+
 
 export default App;
