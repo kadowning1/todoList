@@ -10,7 +10,8 @@ class App extends Component {
         this.state = {
             allItems: [],
             inputText: 'Keith',
-            filterBy: 'All'
+            filterBy: 'All',
+            totalItems: 0
         }
     }
 
@@ -27,7 +28,7 @@ class App extends Component {
                 <div className='container'>
                     <div className='row justify-content-center'>
                         <Header />
-                        <Items />
+                        <Items text='this.state.inputText'/>
                         <Footer />
                     </div>
                 </div>

@@ -2,9 +2,9 @@
 
 import React from 'react'
 
-export default function Footer() {
+export default function Footer(props) {
+    console.log(props)
     return (
-        
                 <div className='col-12 text-center justify-content-center'>
                     <div className="btn-group" role="group" aria-label="Basic outlined example">
                     <div className='h5 d-flex justify-content-start'>Count=</div>
