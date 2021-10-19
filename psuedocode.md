@@ -21,11 +21,16 @@
      - will contain intial state setting
      - will render the other 3 components
     - Footer
-     - Remove Button
-     - Active Button
-     - Completed Button
+     - Remove Button 
+     - Active Button (Bootstrap Button Group)
+     - Completed Button (Bootstrap Button Group)
+     - All Button (Bootstrap Button Group)
+     - Count number of to do
+     - Could be footer
     - Header
      - Nav Bar
+      - Enter Button - Add to todo list
+      - Text Input
     - List Section
      - input field to pass to Local Storage of To Do item
 
@@ -94,3 +99,19 @@
 - 3 different views
 
 ### 10/19 Session w/Ian
+
+- Wireframe
+- UML Diagram
+- Psuedocode Methods & Patterns
+
+- Atomic Design Principles
+    - Page
+    - Organisms
+    - Molecules
+    - Atoms
+
+- React Components
+    1. App (only when single page)
+    2. ToDo List organism
+    3. Footer Organism
+    4. Header Molecule
