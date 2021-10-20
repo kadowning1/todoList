@@ -1,6 +1,6 @@
 import React from 'react'
 
-localStorage.setItem('myCat', 'Tom')
+//localStorage.setItem('myCat', 'Tom')
 export default function Footer() {
     return (
         <footer className="d-flex flex-wrap align-items-center py-3 my-4 border-top justify-content-center">

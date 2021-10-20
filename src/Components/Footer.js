@@ -15,7 +15,6 @@ export default function Footer(props) {
                         <button type="button" className="btn btn-outline-secondary">Clear Completed</button>
                     </div>
                 </div>
-            
         );
 }
 
