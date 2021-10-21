@@ -5,9 +5,10 @@ import Footer from './Components/Footer'
 import React, { Component } from "react"
 
 //need to assign correct filtering values
-//need to complete buttons (trash and check)
+//need to complete buttons functionailty (trash and check)
 //need to add LocalStorage and Stringify
-//style
+//not be able to click an empty field
+//make sure count is correct
 
 class App extends Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class App extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.trashItem = this.trashItem.bind(this);
         this.checkItem = this.checkItem.bind(this);
+        this.checkAll = this.checkAll.bind(this);
 
     }
 
@@ -34,21 +36,15 @@ class App extends Component {
         filterBy: 'all',
     })
 
-    componentDidUpdate() {
-        console.log('add tasks in local storage')
-    }
-
-    componentDidMount() {
-        console.log('set tasks in local storage')
-    }
-
     createNewItem(event) {
         event.preventDefault()
+        if (!this.state.inputText)
+            alert('Please add a to do')
 
         let smartObj =
         {
             key: Date.now(),
-            checkedItem: false,
+            completedItem: false,
             deleteItem: false,
             inputText: this.state.inputText
         }
@@ -65,22 +61,47 @@ class App extends Component {
         });
     }
 
-    trashItem() {
-         // need to reference smart obj to flip deleteItem to true
-         console.log("trash")
-        this.setState({
-            allItems: this.allItems.length - 1,
-            deleteItem: true,
-            filterBy: '' //all items minus completed items
-        })
-    }
+    // componentDidMount() {
+    //     console.log('set tasks in local storage')
+    //     let storage = window.localStorage.getItem('allItems')
+    //     if (storage) {
+    //         this.setState({ allItems: JSON.parse(storage) })
+    //     }
+    //     else {
+    //         window.localStorage.setItem('allItems', JSON.stringify(this.state.allItems));
 
-    checkItem() { // need to reference smart obj to flip checkedItem to true
-        console.log('check item')
+    //     }
+    // }
+    // componentDidUpdate() {
+    //     console.log('add tasks in local storage')
+    //     window.localStorage.setItem('allItems', JSON.stringify(this.state.allItems))
+    // }
+
+    trashItem(key) {
+        // need to filter through items to see filterby status
+        console.log("trash")
+        let deletedTask = this.state.allItems.filter((allItems) => allItems.key !== key);
         this.setState({
-            allItems: this.allItems.length - 1,
-            checkedItem: true,
-            filterBy: 'completed'
+            allItems: deletedTask
+            // allItems: this.allItems.length - 1,
+            // deleteItem: true,
+            // filterBy: '' //all items minus completed items
+        })
+    };
+
+    checkItem(key) { // need to filter through item --- cross off item
+        console.log('check item')
+        let checkedToDo = this.state.allItems.map((allItems) => {
+            if (allItems.key === key) {
+                allItems.completedItem = true
+            }
+            return allItems;
+        });
+        this.setState({
+            allItems: checkedToDo
+            // allItems: this.allItems.length - 1,
+            // checkedItem: true,
+            // filterBy: 'completed'
         })
     }
 
@@ -88,13 +109,31 @@ class App extends Component {
         this.setState(this.getInitialState());
     }
 
+    checkAll(item) {
+        let allChecked = this.state.allItems.map((allItems) => {
+            if (allItems.filterBy === 'completed') {
+            }
+            return item
+        })
+        this.setState({
+            filterBy: allChecked
+        })
+    }
+
     filterState(newFilterState) {
         console.log(newFilterState)
-
         this.setState({
             filterBy: newFilterState,
         })
+    }
 
+    filterToDo(item) {
+        if (this.filterState() === 'all')
+            return item
+        if (this.filterState() === 'completed')
+            return item.completedItem === true;
+        if (this.filterState() === 'active')
+            return item.completedItem === false;
     }
 
     handleChange(event) {
@@ -102,13 +141,13 @@ class App extends Component {
     }
 
     render() {
-        
+
         return (
             <>
                 <div className="">
                     <h1 className="text-center">
                         To Do List
-            </h1>
+                    </h1>
                 </div>
                 <div className='container'>
                     <div className='row d-flex justify-content-center'>
@@ -119,8 +158,8 @@ class App extends Component {
                             handleChange={this.handleChange}
                         />
 
-                        {this.state.allItems.map((obj, index) =>
-                        
+                        {this.state.allItems.filter(this.filterToDo).map((obj, index) =>
+
                             <Items
                                 trashItem={this.trashItem}
                                 checkItem={this.checkItem}
@@ -132,6 +171,7 @@ class App extends Component {
                             filterState={this.filterState}
                             clearAll={this.clearAll}
                             totalItems={this.state.allItems.length}
+                            addAll={this.addAll}
                         />
                     </div>
                 </div>

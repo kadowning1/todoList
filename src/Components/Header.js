@@ -5,7 +5,7 @@ import React from 'react'
 export default function Header(props) {
     return (
         <div className="col-lg-8 col-sm-12 py-2">
-            <div className="card card-body flex-column text-center p-3 mb-2 bg-secondary text-white h-100 justify-content-center">
+            <div className="card card-body flex-column text-center mb-2 bg-secondary text-white h-100 justify-content-center">
                 <form className="text-center justify-content-center" onSubmit={props.createNewItem}>
                     <label>
                         <input
