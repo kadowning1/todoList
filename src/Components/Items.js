@@ -4,9 +4,10 @@ import React, { Component } from "react"
 class Items extends Component {
 
 
+
     //------------------View-----------------//
     render(props) {
-
+        console.log(this.props.complete)
         return (
 
             <div className='row'>
@@ -15,7 +16,7 @@ class Items extends Component {
                     <button
                         type="button"
                         className="btn btn-rounded mx-auto bg-secondary text-white h-100 d-flex align-items-center"
-                        onClick={this.props.checkItem}>
+                        onClick={() => this.props.checkItem(this.props.id)}>
                         <i className="fas fa-check-circle">
                         </i>
                     </button>
@@ -23,8 +24,11 @@ class Items extends Component {
 
                 <div className="col-8 py-2">
                     {/* <div className="card card-body flex-column text-center mb-2 bg-secondary text-white h-100"> */}
-                    <h1 className='justify-content-center bg-secondary text-white h-100 d-flex mb-2'>
-                        {this.props.text}
+                    <h1 className='rounded justify-content-center bg-secondary text-white h-100 d-flex mb-2'>
+                        {this.props.complete
+                            ? (<strike>{this.props.text}</strike>)
+                            : (this.props.text)
+                        }
                     </h1>
                 </div>
 
@@ -32,7 +36,7 @@ class Items extends Component {
                     <button
                         type="button"
                         className="btn btn-rounded mx-auto bg-secondary text-white h-100 d-flex align-items-center"
-                        onClick={this.props.trashItem}>
+                        onClick={() => this.props.trashItem(this.props.id)}>
                         <i className="fas fa-trash-alt">
                         </i>
                     </button>

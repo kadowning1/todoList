@@ -2,12 +2,11 @@ import './App.css';
 import Header from "./Components/Header"
 import Items from './Components/Items'
 import Footer from './Components/Footer'
+import ResuableFooter from './Components/ResuableFooter'
 import React, { Component } from "react"
 
 //need to assign correct filtering values
 //need to complete buttons functionailty (trash and check)
-//need to add LocalStorage and Stringify
-//not be able to click an empty field
 //make sure count is correct
 
 class App extends Component {
@@ -27,7 +26,7 @@ class App extends Component {
         this.trashItem = this.trashItem.bind(this);
         this.checkItem = this.checkItem.bind(this);
         this.checkAll = this.checkAll.bind(this);
-
+        this.restoreAll = this.restoreAll.bind(this);
     }
 
     getInitialState = () => ({
@@ -38,110 +37,120 @@ class App extends Component {
 
     createNewItem(event) {
         event.preventDefault()
-        if (!this.state.inputText)
-            alert('Please add a to do')
+        if (this.state.inputText !== '') {
 
-        let smartObj =
-        {
-            key: Date.now(),
-            completedItem: false,
-            deleteItem: false,
-            inputText: this.state.inputText
-        }
-
-        this.setState(previousState => {
-            let newAllItems = [smartObj, ...previousState.allItems]
-            console.log(newAllItems)
-            let newState = {
-                allItems: newAllItems,
-                inputText: '',
-                filterBy: 'active'
+            let smartObj =
+            {
+                key: Date.now(),
+                completedItem: false,
+                deleteItem: false,
+                inputText: this.state.inputText
             }
-            return newState
-        });
+
+            this.setState(previousState => {
+                let newAllItems = [smartObj, ...previousState.allItems]
+                //console.log(newAllItems)
+                let newState = {
+                    allItems: newAllItems,
+                    inputText: '',
+                    filterBy: 'active'
+                }
+                return newState
+            });
+        }
     }
 
-    // componentDidMount() {
-    //     console.log('set tasks in local storage')
-    //     let storage = window.localStorage.getItem('allItems')
-    //     if (storage) {
-    //         this.setState({ allItems: JSON.parse(storage) })
-    //     }
-    //     else {
-    //         window.localStorage.setItem('allItems', JSON.stringify(this.state.allItems));
-
-    //     }
-    // }
-    // componentDidUpdate() {
-    //     console.log('add tasks in local storage')
-    //     window.localStorage.setItem('allItems', JSON.stringify(this.state.allItems))
-    // }
+    componentDidMount() {
+        //console.log('set tasks in local storage')
+        let storage = window.localStorage.getItem('allItems')
+        if (storage) {
+            this.setState({ allItems: JSON.parse(storage) })
+        }
+        else {
+            window.localStorage.setItem('allItems', JSON.stringify(this.state.allItems));
+        }
+    }
+    componentDidUpdate() {
+        //console.log('add tasks in local storage')
+        window.localStorage.setItem('allItems', JSON.stringify(this.state.allItems))
+    }
 
     trashItem(key) {
-        // need to filter through items to see filterby status
-        console.log("trash")
-        let deletedTask = this.state.allItems.filter((allItems) => allItems.key !== key);
-        this.setState({
-            allItems: deletedTask
-            // allItems: this.allItems.length - 1,
-            // deleteItem: true,
-            // filterBy: '' //all items minus completed items
-        })
-    };
-
-    checkItem(key) { // need to filter through item --- cross off item
-        console.log('check item')
-        let checkedToDo = this.state.allItems.map((allItems) => {
-            if (allItems.key === key) {
-                allItems.completedItem = true
+        //console.log("trash")
+        let deletedTask = this.state.allItems.map(item => {
+            if (item.key === key) {
+                item.deleteItem = !item.deleteItem
             }
-            return allItems;
+            return item
         });
         this.setState({
-            allItems: checkedToDo
-            // allItems: this.allItems.length - 1,
-            // checkedItem: true,
-            // filterBy: 'completed'
+            allItems: deletedTask,
+            // inputText : this.state.allItems.length
+        })
+    }
+
+    checkItem(key) {
+        //console.log('check item')
+        let checkedToDo = this.state.allItems.map(item => {
+            if (item.key === key) {
+                item.completedItem = !item.completedItem
+            }
+            return item
+        });
+        this.setState({
+            allItems: checkedToDo,
+            //totalItems : this.state.allItems.length - 1
         })
     }
 
     clearAll = () => {
+        //console.log('clear all')
         this.setState(this.getInitialState());
     }
 
-    checkAll(item) {
-        let allChecked = this.state.allItems.map((allItems) => {
-            if (allItems.filterBy === 'completed') {
-            }
-            return item
-        })
+    checkAll() {
+        console.log("add all")
+        let allChecked = this.state.allItems.filter(item => !item.completedItem)
+
         this.setState({
-            filterBy: allChecked
+            allChecked: allChecked.map(item => item.completedItem = true)
+            //filterBy: allChecked,
+            //totalItems : this.state.allItems.length - 1
+        })
+    }
+
+    restoreAll() {
+        let allChecked = this.state.allItems.filter(item => item.completedItem)
+
+        this.setState({
+            allChecked: allChecked.map(item => item.completedItem = false)
         })
     }
 
     filterState(newFilterState) {
-        console.log(newFilterState)
+        //console.log(newFilterState)
         this.setState({
             filterBy: newFilterState,
         })
     }
 
-    filterToDo(item) {
-        if (this.filterState() === 'all')
-            return item
-        if (this.filterState() === 'completed')
-            return item.completedItem === true;
-        if (this.filterState() === 'active')
-            return item.completedItem === false;
+    filterToDo() {
+        if (this.state.filterBy === 'all')
+            return this.state.allItems.filter(item => !item.deleteItem)
+        if (this.state.filterBy === 'completed')
+            return this.state.allItems.filter(item => item.completedItem && !item.deleteItem)
+        if (this.state.filterBy === 'active')
+            return this.state.allItems.filter(item => !item.completedItem && !item.deleteItem)
     }
 
     handleChange(event) {
-        this.setState({ inputText: event.target.value });
+        this.setState({
+            inputText: event.target.value
+        });
     }
 
     render() {
-
+        let filteredArray = this.filterToDo()
         return (
             <>
                 <div className="">
@@ -158,21 +167,26 @@ class App extends Component {
                             handleChange={this.handleChange}
                         />
 
-                        {this.state.allItems.filter(this.filterToDo).map((obj, index) =>
+                        {filteredArray.map((obj, index) =>
 
                             <Items
                                 trashItem={this.trashItem}
                                 checkItem={this.checkItem}
                                 text={obj.inputText}
-                                key={index}></Items>
+                                key={index}
+                                id={obj.key}
+                                complete={obj.completedItem}>
+                            </Items>
                         )}
 
                         <Footer
                             filterState={this.filterState}
                             clearAll={this.clearAll}
-                            totalItems={this.state.allItems.length}
-                            addAll={this.addAll}
+                            totalItems={filteredArray.length}
+                            checkAll={this.checkAll}
+                            restoreAll={this.restoreAll}
                         />
+                        <ResuableFooter />
                     </div>
                 </div>
 

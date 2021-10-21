@@ -5,8 +5,6 @@ import React from 'react'
 export default function Footer(props) {
     console.log(props)
 
-
-
     return (
         <div className='col-12 text-center justify-content-center'>
             <div className="btn-group" role="group" aria-label="Basic outlined example">
@@ -34,12 +32,18 @@ export default function Footer(props) {
                         className="btn btn-outline-secondary"
                         onClick={() => props.filterState('completed')}>
                         Completed
-                            </button>
+                        </button>
                     <button
                         type="button"
                         className="btn btn-outline-secondary"
-                        onClick={props.addAll}>
-                        Add All
+                        onClick={props.checkAll}>
+                        Check All
+                        </button>
+                    <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        onClick={props.restoreAll}>
+                        Restore All
                         </button>
                     <button
                         type="button"
