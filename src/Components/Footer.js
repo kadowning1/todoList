@@ -37,7 +37,7 @@ export default function Footer(props) {
                         type="button"
                         className="btn btn-outline-secondary"
                         onClick={props.checkAll}>
-                        Check All
+                        Complete All
                         </button>
                     <button
                         type="button"
