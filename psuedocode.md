@@ -70,11 +70,19 @@
 - helperFunctions
     - Add Item
         - push item into allItems array
+        - create item and smart obj
+            - key
+            - text
+            - completed
     - Checked Off
         - Line through item
+            - if completed
+            - then check off
+         - look at corresponding key
     - Delete item
         - Remove item completely from allItems array
         - onClick to trash button
+        - look at corresponding key
     - All
         - return all Items
         - this.filterBy = All
@@ -110,7 +118,9 @@
 ##### View
  - render
 
- - method to mapArray
+ - method to map itemsArray
+
+ - pass props
 
 ### 10/18 Session w/Ian
 

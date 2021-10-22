@@ -143,6 +143,10 @@ class App extends Component {
             return this.state.allItems.filter(item => !item.completedItem && !item.deleteItem)
     }
 
+    getTotal (){
+        return this.state.allItems.filter( item => !item.deleteItem).length
+    }
+
     handleChange(event) {
         this.setState({
             inputText: event.target.value
@@ -183,6 +187,7 @@ class App extends Component {
                             filterState={this.filterState}
                             clearAll={this.clearAll}
                             totalItems={filteredArray.length}
+                            everythingItems={this.getTotal()}
                             checkAll={this.checkAll}
                             restoreAll={this.restoreAll}
                         />

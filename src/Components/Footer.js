@@ -8,7 +8,7 @@ export default function Footer(props) {
     return (
         <div className='col-12 text-center justify-content-center'>
             <div className="btn-group" role="group" aria-label="Basic outlined example">
-                <div className='h5 d-flex justify-content-start'> Count: {props.totalItems}
+                <div className='h5 d-flex justify-content-start'> Count: {props.totalItems} of {props.everythingItems}
                     <br></br>
                 </div>
             </div>
